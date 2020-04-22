@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<%- include('layouts/navbar'); -%>
+<%if(!loggedIn){%>
+<h1>Welcome to allsport</h1>
+<%}%>
+<%if(loggedIn){%>
+
+<H1>Welcome (insert username)</H1>
+<h1>Mjau</h1>
+<%}%>
+</body>
+
+</html>
