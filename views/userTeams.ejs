@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+<%- include('layouts/navbar'); -%>
+<h1>My teams</h1>
+<% for (let i = 0; i < teams.length; i++) { %>
+
+    <a href="/teams/<%= teams[i]._id %>">
+        <h2>
+            <%= teams[i].teamName%>
+        </h2>
+    </a>
+
+<%}%>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Create a team</h1>
+
+<%- include('layouts/navbar'); -%>
+
+<form action="/teams/create" method="POST" enctype="multipart/form-data">
+    <input type="text"  placeholder="Team name" id="teamname" name="teamname">
+    <input type="text"   placeholder="Type of sport" id="sporttype" name="sporttype">
+    <textarea id="description" name="description" placeholder="Team description"></textarea>
+    <input type="text"   placeholder="Location" id="location" name="location">
+    <button type="submit">Create team</button>
+</form>
+
+
+</body>
+</html>

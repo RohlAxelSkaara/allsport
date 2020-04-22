@@ -16,9 +16,15 @@ const logincontroller = require('./controllers/login')
 const loginUserController = require('./controllers/loginUser')
 const expressSession = require('express-session')
 const logoutController = require('./controllers/logout')
+const createTeamController = require('./controllers/newTeam')
+const storeTeamController = require('./controllers/storeTeam')
+const userTeamsController = require('./controllers/userTeams')
+const getTeamController = require('./controllers/getTeam')
+
 
 //Middelware
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleWare')
+const authMiddleware = require('./middleware/authMiddleware')
 
 app.use(expressSession({
     secret: 'Unicornland'
@@ -50,4 +56,8 @@ app.get('/auth/register', redirectIfAuthenticatedMiddleWare, newUserController)
 app.post('/users/register', redirectIfAuthenticatedMiddleWare,  storeUserController)
 app.get('/auth/login', redirectIfAuthenticatedMiddleWare,  logincontroller)
 app.post('/users/login', redirectIfAuthenticatedMiddleWare, loginUserController)
-app.get('/auth/logout', logoutController)
+app.get('/auth/logout',authMiddleware, logoutController)
+app.get('/auth/create', authMiddleware,createTeamController)
+app.post('/teams/create',authMiddleware, storeTeamController)
+app.get('/auth/userTeams', authMiddleware, userTeamsController)
+app.get('/teams/:id', authMiddleware, getTeamController)
