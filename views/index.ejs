@@ -14,6 +14,23 @@
 <%if(loggedIn){%>
 
 
+<h1>Here is your feed</h1>
+<%for (let i = 0; i < teamPost.length; i++){%>
+
+    <a href="/teams/post/<%= teamPost[i]._id%>">
+<h2>
+   <%= teamPost[i].title%>
+</h2>
+
+    <p>
+        <%= teamPost[i].description%>
+    </p>
+
+<p><small>
+        <%= teamPost[i].datePosted%>
+    </small></p>
+    </a>
+<%}%>
 <%}%>
 </body>
 

@@ -7,14 +7,14 @@
 
 <%- include('layouts/navbar'); -%>
 <h1>My teams</h1>
-<% for (let i = 0; i < teams.length; i++) { %>
+<% for (let i = 0; i < user.membership.length; i++) { %>
 
-    <a href="/teams/<%= teams[i]._id %>">
-        <h2>
-            <%= teams[i].teamName%>
-        </h2>
-    </a>
+            <a href="/teams/<%= user.membership[i].id %>">
+                <h2>
+                    <%= user.membership[i].teamName%>
+                </h2>
+            </a>
+        <%}%>
 
-<%}%>
 </body>
 </html>

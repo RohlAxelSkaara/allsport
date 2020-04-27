@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<%- include('layouts/navbar'); -%>
+<h2>Search for a team!</h2>
+<form action="" method="POST" enctype="multipart/form-data">
+
+
+
+    <% for (let i = 0; i < teams.length; i++) { %>
+
+    <%console.log(teams[i].location)%>
+
+    <%}%>
+
+
+
+
+    <select id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+
+
+    <select id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+
+
+
+    <p>Experience level:</p>
+    <input type="radio" id="beginner" name="beginner" value="beginner">
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br>
+    <input type="radio" id="other" name="gender" value="other">
+    <label for="other">Other</label>
+
+
+
+
+
+
+
+    <button type="submit">Create team</button>
+</form>
+
+
+    <h2>Join a team!</h2>
+    <% for (let i = 0; i < teams.length; i++) { %>
+
+        <a href="/teams/<%= teams[i]._id %>">
+            <h2>
+                <%= teams[i].teamName%>
+            </h2>
+        </a>
+    <%}%>
+
+</body>
+
+</html>

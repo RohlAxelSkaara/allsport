@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+let uniqueValidator = require('mongoose-unique-validator')
 
 const bcrypt = require('bcrypt')
+
 
 const UserSchema = new Schema({
     username: { // pass in config object. and put in validation rules
@@ -12,10 +14,21 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    membership: [{ type: Schema.Types.ObjectId, ref: 'Team' }],
+    leadership: [{type: Schema.Types.ObjectId, ref: 'Team'}]
+
+
 });
 
+UserSchema.plugin(uniqueValidator);
+
 UserSchema.pre('save', function(next){
+
+    if(!this.isModified('password')){
+        return next();
+    }
+
     const user = this
     bcrypt.hash(user.password, 10,  (error, hash) => {
         user.password = hash

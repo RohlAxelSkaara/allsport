@@ -20,7 +20,11 @@ const createTeamController = require('./controllers/newTeam')
 const storeTeamController = require('./controllers/storeTeam')
 const userTeamsController = require('./controllers/userTeams')
 const getTeamController = require('./controllers/getTeam')
-
+const updateMembershipController = require('./controllers/updateMembership')
+const findTeamController = require('./controllers/findTeam')
+const newPostController = require('./controllers/newPost')
+const getPostController = require('./controllers/getPost')
+const availableController = require('./controllers/available')
 
 //Middelware
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleWare')
@@ -47,6 +51,10 @@ app.use("*", (req, res, next) => {
 });
 
 
+
+
+
+
 app.listen(4000, ()=>{
     console.log('App listening on port 4000 ...')
 })
@@ -61,3 +69,8 @@ app.get('/auth/create', authMiddleware,createTeamController)
 app.post('/teams/create',authMiddleware, storeTeamController)
 app.get('/auth/userTeams', authMiddleware, userTeamsController)
 app.get('/teams/:id', authMiddleware, getTeamController)
+app.post('/teams/:id',authMiddleware, updateMembershipController)
+app.get('/findTeam', findTeamController)
+app.post('/teams/newPost/:id', newPostController)
+app.get('/teams/post/:id', getPostController)
+app.post('/teams/post/:id/available', availableController)

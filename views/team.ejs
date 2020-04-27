@@ -4,7 +4,84 @@
 <body>
 <%- include('layouts/navbar'); -%>
 
-<h1><%= teams.teamName %></h1>
+
+
+
+<h2>
+    Team: <%= teams.teamName%>
+</h2>
+<h2>
+    Sport: <%= teams.sportType%>
+</h2>
+<h2>
+    Description: <%= teams.description%>
+</h2>
+<h2>
+    Our location: <%= teams.location%>
+</h2>
+<h2>Leaders:</h2>
+<%for(let i = 0; i < teams.leaders.length; i++){%>
+    <h2>
+        <%= teams.leaders[i].username%>
+    </h2>
+<%}%>
+
+
+
+<h2>Members:</h2>
+<%for(let i = 0; i < teams.members.length; i++){%>
+    <h2>
+        <%= teams.members[i].username%>
+    </h2>
+<%}%>
+
+
+
+
+
+<%for(let i = 0; i < user.leadership.length; i++){%>
+<%if(user.leadership[i].toString() == teams._id.toString()){%>
+    <form action="/teams/newPost/<%= teams._id %>" method="POST" enctype="multipart/form-data">
+        <input type="text"  placeholder="Title" id="title" name="title">
+        <textarea id="description" name="description" placeholder="Description"></textarea>
+        <button type="submit">Post</button>
+    </form>
+    <%break%>
+<%}%>
+<%}%>
+
+<%let isMember = false%>
+<%for(let i = 0; i < user.membership.length; i++){%>
+<%if(user.membership[i].toString() == teams._id.toString()){%>
+<%isMember = true%>
+<%}%>
+<%}%>
+
+
+
+<%if(isMember == true){%>
+    <h2>Post</h2>
+<%}%>
+
+
+<%if(isMember == true){%>
+<%for (let i = 0; i < teams.teamPost.length; i ++){%>
+<a href="/teams/post/<%= teams.teamPost[i].id %>">
+    <p><%= teams.teamPost[i].title%></p>
+</a>
+<%}%>
+<%}%>
+
+
+
+
+
+<%if(isMember == false){%>
+    <form action="/teams/<%= teams._id %>" method="POST" enctype="multipart/form-data">
+        <button type="submit">Join Team</button>
+    </form>
+<%}%>
+
 
 
 
