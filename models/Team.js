@@ -14,7 +14,7 @@ const TeamSchema = new Schema({
     location: String,
     members: [{ type: Schema.Types.ObjectId, ref: 'User'/*, unique: true*/ }],
     leaders: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    teamPost: [TeamPost.schema]
+    teamPost: [{type: Schema.Types.ObjectId, ref: 'Team'}]
 })
 
 TeamSchema.plugin(uniqueValidator);

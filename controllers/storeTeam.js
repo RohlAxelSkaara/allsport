@@ -1,9 +1,9 @@
 const Team = require('../models/Team.js')
 const User = require('../models/User.js')
 const path = require('path')
+const TeamPost = require('../models/TeamPost')
 
 module.exports = async (req,res)=> {
-    const user = await User.findById(req.session.userId);
     const teamsCreate = await Team.create({
         ...req.body,
         teamName: req.body.teamname,
@@ -14,13 +14,18 @@ module.exports = async (req,res)=> {
         leaders: [req.session.userId]
     });
 
-    const teams = Team.findById(teamsCreate._id)
 
-   console.log(teams)
-
-    await user.leadership.push(teamsCreate)
-    await user.membership.push(teamsCreate)
-    await user.save()
-
-    res.render('userTeams',{user}) // In future version it vil be directed to getTeam, since I cant polulat now get team dont work
+    const creator = await User.findById(req.session.userId)
+    await creator.leadership.push(teamsCreate)
+    await creator.membership.push(teamsCreate)
+    await creator.save()
+    await teamsCreate.save()
+    const user = await User.findById(req.session.userId)
+    const teams =  await Team.findById(teamsCreate._id)
+    const teamPost = await TeamPost.find({team: teams}).sort({'datePosted': -1})
+    res.render('team',{
+        user,
+        teams,
+        teamPost
+    }) // In future version it vil be directed to getTeam, since I cant polulat now get team dont work
 }

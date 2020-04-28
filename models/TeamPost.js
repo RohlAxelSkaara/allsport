@@ -8,11 +8,12 @@ const TeamPostSchema = new Schema({
 
     datePosted:{
         type: Date,
-        default: new Date()
+        default:  Date.now
     },
     available: [{type: Schema.Types.ObjectId, ref: 'User', _id: false}],
     notAvailable: [{type: Schema.Types.ObjectId, ref: 'User', _id: false}],
-    members: [{type: Schema.Types.ObjectId, ref: 'User'}]
+    members: [{type: Schema.Types.ObjectId, ref: 'User' , _id: false}],
+    team: {type: Schema.Types.ObjectId, ref: 'Team'}
 });
 
 

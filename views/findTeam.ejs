@@ -12,59 +12,39 @@
 
 
 
-    <% for (let i = 0; i < teams.length; i++) { %>
 
-    <%console.log(teams[i].location)%>
-
-    <%}%>
-
+<form action="/findTeam" method="POST" enctype="multipart/form-data">
+    <p>Sport</p>
+        <input type="text"  placeholder="Sport" id="sportType" name="sportType">
 
 
+    <p>Location</p>
 
-    <select id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-    </select>
-
-
-    <select id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-    </select>
-
+        <input type="text"  placeholder="Location" id="location" name="location">
 
 
     <p>Experience level:</p>
-    <input type="radio" id="beginner" name="beginner" value="beginner">
-    <label for="male">Male</label><br>
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">Female</label><br>
-    <input type="radio" id="other" name="gender" value="other">
-    <label for="other">Other</label>
-
-
-
-
-
-
-
-    <button type="submit">Create team</button>
+    <input type="radio" id="level" name="level" value="beginner">
+    <label for="beginner">Beginner</label><br>
+    <input type="radio" id="level" name="level" value="novice">
+    <label for="novice">Novice</label><br>
+    <input type="radio" id="level" name="level" value="intermediate">
+    <label for="level">Intermediate</label><br>
+    <input type="radio" id="level" name="level" value="advanced">
+    <label for="advanced">Advanced</label><br>
+    <input type="radio" id="level" name="level" value="expert">
+    <label for="expert">Expert</label>
+<br>
+<br>
+    <button type="submit">Search</button>
 </form>
 
-
-    <h2>Join a team!</h2>
-    <% for (let i = 0; i < teams.length; i++) { %>
-
-        <a href="/teams/<%= teams[i]._id %>">
-            <h2>
-                <%= teams[i].teamName%>
-            </h2>
-        </a>
-    <%}%>
+<%for (let i = 0; i < teams.length; i++){%>
+    <a href="/teams/<%= teams[i]._id%>"
+      <h2>
+          <%= teams[i].teamName%>
+      </h2>
+<%}%>
 
 </body>
 

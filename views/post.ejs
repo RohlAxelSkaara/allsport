@@ -6,43 +6,44 @@
 <body>
 
 <%- include('layouts/navbar'); -%>
+<a href="/teams/<%= post.team._id%>">
+    <h1><%= post.team.teamName%></h1>
+</a>
 
-<h1><%= post.title%></h1>
+<h2><%= post.title%></h2>
 <p><%= post.description%></p>
+<p><small><%= post.datePosted%></small></p>
 
-<%/*%>>
 <%let signedUp = false%>
-<%for(let i = 0; i < available.length; i++){%>
+<%for(let i = 0; i < post.available.length; i++){%>
 <%if(post.available[i].id.toString() == user._id){%>
 <%signedUp = true%>
 <%}%>
 <%}%>
 
 <%let notAvailable = false%>
-<%for(let i = 0; i < notAvailable.length; i++){%>
+<%for(let i = 0; i < post.notAvailable.length; i++){%>
 <%if(post.notAvailable[i].id.toString() == user._id){%>
 <% notAvailable = true%>
 <%}%>
 <%}%>
 
 <%if(signedUp == false){%>
-<%if(signedUp == false){%>
-<%*/%>
-
-
 <form action="/teams/post/<%= post.id%>/available" method="POST" enctype="multipart/form-data">
-<button type="submit" name="available" value="1">Sign up</button>
+<button type="submit" name="available" value="available">Sign up</button>
 </form>
+<%}%>
 
+<%if(notAvailable == false){%>
 <form action="/teams/post/<%= post.id%>/available" method="POST" enctype="multipart/form-data">
-<button type="submit" name="notAvailable" value="2">Cant come</button>
+<button type="submit" name="notAvailable" value="notAvailable">Cant come</button>
 </form>
+<%}%>
 
-<%console.log(post.available.length)%>
 <h2>Signed up players: <%= post.available.length%></h2>
 
 <%if(post.available != null){%>
-<%for (let i = 0; i < post.available.length -1; i ++){%>
+<%for (let i = 0; i < post.available.length ; i ++){%>
 
     <p><%= post.available[i].username%></p>
 

@@ -18,9 +18,7 @@
 <%for (let i = 0; i < teamPost.length; i++){%>
 
     <a href="/teams/post/<%= teamPost[i]._id%>">
-<h2>
-   <%= teamPost[i].title%>
-</h2>
+   <h2><%= teamPost[i].team.teamName%></h2>  <h3><%= teamPost[i].title%></h3>
 
     <p>
         <%= teamPost[i].description%>
