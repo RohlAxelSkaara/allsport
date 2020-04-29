@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+<%- include('layouts/navbar'); -%>
+
+<h1>Your profile</h1>
+<h2><%= user.username%></h2>
+
+<form action="/profile/update" method="POST" enctype="multipart/form-data">
+    <input type="text"  placeholder="New username" id="newUsername" name="newUsername">
+    <input type="text"  placeholder="New password" id="newPassword" name="newPassword">
+    <button type="submit">Update</button>
+</form>
+
+
+</body>
+</html>

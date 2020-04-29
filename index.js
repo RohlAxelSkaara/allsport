@@ -26,6 +26,9 @@ const teamSearchController = require('./controllers/teamSearch')
 const newPostController = require('./controllers/newPost')
 const getPostController = require('./controllers/getPost')
 const availableController = require('./controllers/available')
+const profileController = require('./controllers/profile')
+const updateProfileController = require('./controllers/updateProfile')
+
 
 //Middelware
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleWare')
@@ -76,3 +79,5 @@ app.post('/findTeam', findTeamController)
 app.post('/teams/newPost/:id', newPostController)
 app.get('/teams/post/:id', getPostController)
 app.post('/teams/post/:id/available', availableController)
+app.get('/profile/', profileController)
+app.post('/profile/update', updateProfileController)
