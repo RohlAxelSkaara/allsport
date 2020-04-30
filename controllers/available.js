@@ -1,9 +1,11 @@
 const User = require('../models/User.js')
 const Post = require('../models/TeamPost.js')
+const Team = require('../models/Team.js')
 
 module.exports = async (req,res)=>{
     const post = await Post.findById(req.params.id).populate('available').populate('notAvailable').populate('team')
-    const user= await User.findById(req.session.userId)
+    const user= await User.findById(req.session.userId).populate('leadership')
+    const teams = await Team.find({teamPost: post._id})
 
    if( await req.body.available == "available") {
         post.available.addToSet(user)
@@ -18,8 +20,15 @@ module.exports = async (req,res)=>{
     await post.save()
 
 
-     res.render('post',{
+
+    console.log(teams)
+    console.log(user)
+
+
+
+    res.render('post',{
         post,
-        user
+        user,
+         teams
     });
 }

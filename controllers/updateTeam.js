@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
 
     }
 
-    console.log(conditions);
+
 
     const teams = await Team.findByIdAndUpdate(req.params.id, conditions, function () {}).populate('members').populate('leaders')
     const user= await User.findById(req.session.userId)

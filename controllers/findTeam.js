@@ -38,6 +38,12 @@ module.exports = async (req, res) =>{
     const query = req.body;
     const conditions = {};
 
+
+
+    if (query.teamName) {
+        conditions.teamName = query.teamName;
+    }
+
     if (query.sportType) {
         conditions.sportType = query.sportType;
     }

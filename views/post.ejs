@@ -60,5 +60,36 @@
 <%}%>
 
 
+
+<%let isLeader = false%>
+<%for(let i = 0; i < user.leadership.length; i++){%>
+<%if(user.leadership[i].toString() == teams.toString()){%>
+<%isLeader = true%>
+<%}%>
+<%}%>
+
+
+
+<%if(isLeader == true){%>
+    <h2>Update Post</h2>
+    <form action="/teams/post/<%= post.id%>/update" method="POST" enctype="multipart/form-data">
+
+        <p>Title:</p>
+        <input type="text"  placeholder="New title" id="updateTitle" name="updateTitle">
+
+        <p>Description:</p>
+        <input type="text"   placeholder="New description" id="updateDescription" name="updateDescription">
+
+        <button type="submit">Update post</button>
+    </form>
+
+<%}%>
+
+
+
+
+
+
+
 </body>
 </html>
