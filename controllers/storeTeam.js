@@ -11,7 +11,8 @@ module.exports = async (req,res)=> {
         description: req.body.description,
         location: req.body.location,
         members: [req.session.userId],
-        leaders: [req.session.userId]
+        leaders: [req.session.userId],
+        level : [req.body.level]
     });
 
 
@@ -21,11 +22,11 @@ module.exports = async (req,res)=> {
     await creator.save()
     await teamsCreate.save()
     const user = await User.findById(req.session.userId)
-    const teams =  await Team.findById(teamsCreate._id)
+    const teams =  await Team.findById(teamsCreate._id).populate('members').populate('leaders')
     const teamPost = await TeamPost.find({team: teams}).sort({'datePosted': -1})
     res.render('team',{
         user,
         teams,
         teamPost
-    }) // In future version it vil be directed to getTeam, since I cant polulat now get team dont work
+    })
 }

@@ -27,7 +27,7 @@ module.exports = async (req,res)=> {
         await teams.teamPost.push(teamPost)
         await teams.save()
         await teamPost.save()
-        const post = await TeamPost.findById(teamPost._id).populate('team')
+        const post = await TeamPost.findById(teamPost._id).populate('team').populate('available').populate('notAvailable')
 
 
         res.render('post',{

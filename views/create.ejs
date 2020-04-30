@@ -12,10 +12,35 @@
 <h1>Create a team</h1>
 
 <form action="/teams/create" method="POST" enctype="multipart/form-data">
+
+    <p>Team name:</p>
     <input type="text"  placeholder="Team name" id="teamname" name="teamname">
+
+    <p>Sport:</p>
     <input type="text"   placeholder="Type of sport" id="sporttype" name="sporttype">
+
+    <p>Description:</p>
     <textarea id="description" name="description" placeholder="Team description"></textarea>
+
+    <p>Location:</p>
     <input type="text"   placeholder="Location" id="location" name="location">
+
+
+    <p>Experience level:</p>
+    <input type="radio" id="level" name="level" value="beginner">
+    <label for="beginner">Beginner / For all</label><br>
+    <input type="radio" id="level" name="level" value="novice">
+    <label for="novice">Novice</label><br>
+    <input type="radio" id="level" name="level" value="intermediate">
+    <label for="level">Intermediate</label><br>
+    <input type="radio" id="level" name="level" value="advanced">
+    <label for="advanced">Advanced</label><br>
+    <input type="radio" id="level" name="level" value="expert">
+    <label for="expert">Expert</label>
+
+    <br>
+    <br>
+
     <button type="submit">Create team</button>
 </form>
 

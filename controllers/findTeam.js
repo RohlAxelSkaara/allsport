@@ -46,6 +46,10 @@ module.exports = async (req, res) =>{
         conditions.location = query.location;
     }
 
+    if (query.level) {
+        conditions.level = query.level;
+    }
+
         const teams = await Team.find(conditions, function () {})
 
     console.log(query)

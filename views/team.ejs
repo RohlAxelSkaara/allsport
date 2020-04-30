@@ -36,6 +36,10 @@
 <h2>
     Our location: <%= teams.location%>
 </h2>
+
+<h2>
+    Level: <%= teams.level%>
+</h2>
 <%if(isMember == true){%>
 <h2>Leaders:</h2>
 <%for(let i = 0; i < teams.leaders.length; i++){%>
@@ -88,7 +92,42 @@
     </form>
 <%}%>
 
+<%if(isLeader == true){%>
+    <h2>Update Team</h2>
+    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
 
+        <p>Team name:</p>
+        <input type="text"  placeholder="Team name" id="updateTeamName" name="updateTeamName">
+
+        <p>Sport:</p>
+        <input type="text"   placeholder="Type of sport" id="updateSportType" name="updateSportType">
+
+        <p>Description:</p>
+        <textarea id="updateDescription" name="updateDescription" placeholder="Team description"></textarea>
+
+        <p>Location:</p>
+        <input type="text"   placeholder="Location" id="updateLocation" name="updateLocation">
+
+
+        <p>Experience level:</p>
+        <input type="radio" id="updateLevel" name="updateLevel" value="beginner">
+        <label for="beginner">Beginner / For all</label><br>
+        <input type="radio" id="updateLevel" name="updateLevel" value="novice">
+        <label for="novice">Novice</label><br>
+        <input type="radio" id="updateLevel" name="updateLevel" value="intermediate">
+        <label for="level">Intermediate</label><br>
+        <input type="radio" id="updateLevel" name="updateLevel" value="advanced">
+        <label for="advanced">Advanced</label><br>
+        <input type="radio" id="updateLevel" name="updateLevel" value="expert">
+        <label for="expert">Expert</label>
+
+        <br>
+        <br>
+
+        <button type="submit">Update team</button>
+    </form>
+
+<%}%>
 
 
 

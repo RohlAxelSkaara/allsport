@@ -25,7 +25,7 @@
 
     <p>Experience level:</p>
     <input type="radio" id="level" name="level" value="beginner">
-    <label for="beginner">Beginner</label><br>
+    <label for="beginner">Beginner / For all</label><br>
     <input type="radio" id="level" name="level" value="novice">
     <label for="novice">Novice</label><br>
     <input type="radio" id="level" name="level" value="intermediate">
@@ -39,11 +39,16 @@
     <button type="submit">Search</button>
 </form>
 
+
+    <br>
+
 <%for (let i = 0; i < teams.length; i++){%>
     <a href="/teams/<%= teams[i]._id%>"
       <h2>
           <%= teams[i].teamName%>
       </h2>
+        <br>
+        <br>
 <%}%>
 
 </body>

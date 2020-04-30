@@ -28,6 +28,7 @@ const getPostController = require('./controllers/getPost')
 const availableController = require('./controllers/available')
 const profileController = require('./controllers/profile')
 const updateProfileController = require('./controllers/updateProfile')
+const updateTeamController = require('./controllers/updateTeam')
 
 
 //Middelware
@@ -81,3 +82,4 @@ app.get('/teams/post/:id', getPostController)
 app.post('/teams/post/:id/available', availableController)
 app.get('/profile/', profileController)
 app.post('/profile/update', updateProfileController)
+app.post('/teams/:id/update', updateTeamController)

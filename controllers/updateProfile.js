@@ -4,13 +4,16 @@ const bcrypt = require('bcrypt')
 module.exports = async (req, res) => {
 
 
+    // Used when updating the Users Profile
+    //-          -          -          -          -          -          -          -          -
     let updateUsername = req.body.newUsername;
     let updatePassword = req.body.newPassword;
+    let deleteUser     = req.body.deleteUser
     const conditions = {};
 
     if (updateUsername) {
-       conditions.username = updateUsername
-       User.findByIdAndUpdate(req.session.userId, conditions, function () {})
+        conditions.username = updateUsername
+        await User.findByIdAndUpdate(req.session.userId, conditions, function () {})
     }
 
     if (updatePassword) {
@@ -20,13 +23,16 @@ module.exports = async (req, res) => {
             User.findByIdAndUpdate(req.session.userId, conditions, function () {})
         })
     }
+    //-          -          -          -          -          -
 
+   /* if (deleteUser) {
+                user.remove()
+                global.loggedIn = null
+                console.log(loggedIn)
+                res.redirect('/')
+            }*/
 
     const user = await User.findById(req.session.userId)
-    console.log(conditions)
-
-
-
 
     res.render('userProfile',{
         user

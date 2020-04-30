@@ -7,7 +7,6 @@ module.exports = async (req,res)=>{
     const user= await User.findById(req.session.userId)
     const teamPost = await TeamPost.find({team: teams}).sort({'datePosted': -1})
 
-
     res.render('team',{
         teams,
         user,
