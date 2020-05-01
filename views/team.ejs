@@ -19,11 +19,6 @@
 <%}%>
 
 
-
-
-
-
-
 <h2>
     Team: <%= teams.teamName%>
 </h2>
@@ -85,6 +80,14 @@
         <textarea id="description" name="description" placeholder="Description"></textarea>
         <button type="submit">Post</button>
     </form>
+
+    <br>
+
+    <h2>Update team:</h2>
+    <form action="/teams/<%= teams.id%>/update" method="GET" enctype="multipart/form-data">
+        <button type="submit">Update team</button>
+    </form>
+
 <%}%>
 
 
@@ -99,52 +102,9 @@
 
 <br>
 
-<%if(isLeader == true){%>
-    <h2>Update Team</h2>
-    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
-
-        <p>Team name:</p>
-        <input type="text"  placeholder="Team name" id="updateTeamName" name="updateTeamName">
-
-        <p>Sport:</p>
-        <input type="text"   placeholder="Type of sport" id="updateSportType" name="updateSportType">
-
-        <p>Description:</p>
-        <textarea id="updateDescription" name="updateDescription" placeholder="Team description"></textarea>
-
-        <p>Location:</p>
-        <input type="text"   placeholder="Location" id="updateLocation" name="updateLocation">
 
 
-        <p>Experience level:</p>
-        <input type="radio" id="updateLevel" name="updateLevel" value="beginner">
-        <label for="beginner">Beginner / For all</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="novice">
-        <label for="novice">Novice</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="intermediate">
-        <label for="level">Intermediate</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="advanced">
-        <label for="advanced">Advanced</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="expert">
-        <label for="expert">Expert</label>
 
-        <br>
-        <br>
-
-        <button type="submit">Update team</button>
-    </form>
-
-    <br>
-
-    <h2>Make leader</h2>
-    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
-        <input type="text"  placeholder="Make leader" id="newLeader" name="newLeader">
-        <button type="submit">Make leader</button>
-    </form>
-
-<%}%>
-
-<br>
 
 <%if(isMember == true){%>
     <h2>Quit Team</h2>
@@ -156,21 +116,7 @@
 
 
     <%}%>
-    <br>
 
-<%if(isLeader == true){%>
-    <h2>Delete Team</h2>
-
-    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
-        <input type="password"  placeholder="Enter password" id="deleteTeam" name="deleteTeam">
-        <button type="submit">Delete</button>
-    </form>
-
-
-
-
-
-<%}%>
 
 
 
