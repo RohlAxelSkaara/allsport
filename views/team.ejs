@@ -41,6 +41,9 @@
     Level: <%= teams.level%>
 </h2>
 <%if(isMember == true){%>
+
+<br>
+
 <h2>Leaders:</h2>
 <%for(let i = 0; i < teams.leaders.length; i++){%>
     <h2>
@@ -49,19 +52,34 @@
 <%}%>
 <%}%>
 
+<br>
+
 <%if(isMember == true){%>
 <h2>Members:</h2>
 <%for(let i = 0; i < teams.members.length; i++){%>
     <h2>
         <%= teams.members[i].username%>
     </h2>
+
 <%}%>
 <%}%>
 
+<br>
 
+<%if(isMember == true){%>
+<h2>Posts</h2>
 
+<%for (let i = 0; i < teamPost.length; i ++){%>
+    <a href="/teams/post/<%= teamPost[i].id %>">
+        <p><%= teamPost[i].title%></p>
+    </a>
+<%}%>
+<%}%>
+
+<br>
 
 <%if(isLeader == true){%>
+    <h2>Create a new post:</h2>
     <form action="/teams/newPost/<%= teams._id %>" method="POST" enctype="multipart/form-data">
         <input type="text"  placeholder="Title" id="title" name="title">
         <textarea id="description" name="description" placeholder="Description"></textarea>
@@ -70,21 +88,7 @@
 <%}%>
 
 
-
-
-
-<%if(isMember == true){%>
-    <h2>Post</h2>
-
-<%for (let i = 0; i < teamPost.length; i ++){%>
-<a href="/teams/post/<%= teamPost[i].id %>">
-    <p><%= teamPost[i].title%></p>
-</a>
-<%}%>
-<%}%>
-
-
-
+<br>
 
 
 <%if(isMember == false){%>
@@ -92,6 +96,8 @@
         <button type="submit">Join Team</button>
     </form>
 <%}%>
+
+<br>
 
 <%if(isLeader == true){%>
     <h2>Update Team</h2>
@@ -127,6 +133,42 @@
 
         <button type="submit">Update team</button>
     </form>
+
+    <br>
+
+    <h2>Make leader</h2>
+    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
+        <input type="text"  placeholder="Make leader" id="newLeader" name="newLeader">
+        <button type="submit">Make leader</button>
+    </form>
+
+<%}%>
+
+<br>
+
+<%if(isMember == true){%>
+    <h2>Quit Team</h2>
+
+    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
+        <input type="password"  placeholder="Enter password" id="quitTeam" name="quitTeam">
+        <button type="submit">Quit</button>
+    </form>
+
+
+    <%}%>
+    <br>
+
+<%if(isLeader == true){%>
+    <h2>Delete Team</h2>
+
+    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
+        <input type="password"  placeholder="Enter password" id="deleteTeam" name="deleteTeam">
+        <button type="submit">Delete</button>
+    </form>
+
+
+
+
 
 <%}%>
 

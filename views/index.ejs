@@ -15,6 +15,7 @@
 
 
 <h1>Here is your feed</h1>
+<%if(teamPost.length != 0){%>
 <%for (let i = 0; i < teamPost.length; i++){%>
 
     <a href="/teams/post/<%= teamPost[i]._id%>">
@@ -28,6 +29,7 @@
         <%= teamPost[i].datePosted%>
     </small></p>
     </a>
+<%}%>
 <%}%>
 <%}%>
 </body>

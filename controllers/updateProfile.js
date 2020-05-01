@@ -1,4 +1,6 @@
 const User = require('../models/User.js')
+const Team = require('../models/Team')
+const Post = require('../models/TeamPost')
 const bcrypt = require('bcrypt')
 
 module.exports = async (req, res) => {
@@ -30,6 +32,25 @@ module.exports = async (req, res) => {
      if (await deleteUser) {
          await bcrypt.compare(deleteUser, userDelete.password, async (error, same) => {
             if (await same) {
+
+                //Delete the User from all Users Team.members
+                const teams = await Team.find({members: userDelete._id})
+                for(let i = 0; i < teams.length; i++){
+                    await teams[i].members.pull(userDelete._id)
+                    await teams[i].leaders.pull(userDelete._id)
+                    await teams[i].save()
+                }
+
+                //Delete the User from all Users Post.members, available and notAvailable
+                const post = await Post.find({members: userDelete._id})
+                for(let i = 0; i < post.length; i++){
+                    await post[i].members.pull(userDelete._id)
+                    await post[i].available.pull(userDelete._id)
+                    await post[i].notAvailable.pull(userDelete._id)
+                    await post[i].save()
+                }
+
+                //Delete the user and return to homepage
                 await User.findByIdAndDelete({_id: userDelete._id})
                 await req.session.destroy(()=>{
                    res.redirect('/')

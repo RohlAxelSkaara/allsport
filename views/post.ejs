@@ -82,6 +82,18 @@
 
         <button type="submit">Update post</button>
     </form>
+<br>
+
+    <h2>Delete Post</h2>
+
+    <form action="/teams/post/<%= post.id%>/update" method="POST" enctype="multipart/form-data">
+        <input type="password"  placeholder="Enter password" id="deletePost" name="deletePost">
+        <button type="submit">Delete</button>
+    </form>
+
+
+
+
 
 <%}%>
 

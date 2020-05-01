@@ -7,33 +7,35 @@ const User = require('../models/User')
 
 
 module.exports = async (req,res)=> {
-        const user = await User.findById(req.session.userId)
-        const teams = await Team.findById(req.params.id)
+
+        const teamsUpdate = await Team.findById(req.params.id)
         const teamPost = await TeamPost.create({
         ...req.body,
         title: req.body.title,
         description: req.body.description,
          available: [],
          notAvailable: [],
-         team: teams._id
+         team: teamsUpdate._id
     })
 
 
-    for(let i = 0; i < teams.members.length; i++){
-        await teamPost.members.push(teams.members[i])
+    for(let i = 0; i < teamsUpdate.members.length; i++){
+        await teamPost.members.push(teamsUpdate.members[i])
         await teamPost.save()
     }
 
-        await teams.teamPost.push(teamPost)
-        await teams.save()
+        await teamsUpdate .teamPost.push(teamPost)
+        await teamsUpdate .save()
         await teamPost.save()
-        const post = await TeamPost.findById(teamPost._id).populate('team').populate('available').populate('notAvailable')
 
+        const post = await TeamPost.findById(teamPost._id).populate('team').populate('available').populate('notAvailable')
+        const user= await User.findById(req.session.userId).populate('leadership')
+        const teams = await Team.findById(req.params.id)
 
         res.render('post',{
             post,
             teams,
-            user,
+            user
         });
     }
 
