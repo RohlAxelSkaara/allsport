@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 
 
-
+//Controller
 const homeController = require('./controllers/home')
 const newUserController = require('./controllers/newUser')
 const storeUserController = require('./controllers/storeUser')
@@ -22,7 +22,6 @@ const userTeamsController = require('./controllers/userTeams')
 const getTeamController = require('./controllers/getTeam')
 const updateMembershipController = require('./controllers/updateMembership')
 const findTeamController = require('./controllers/findTeam')
-const teamSearchController = require('./controllers/teamSearch')
 const newPostController = require('./controllers/newPost')
 const getPostController = require('./controllers/getPost')
 const availableController = require('./controllers/available')
@@ -31,11 +30,16 @@ const updateProfileController = require('./controllers/updateProfile')
 const updateTeamController = require('./controllers/updateTeam')
 const updatePostController = require('./controllers/updatePost')
 const teamUpdateController = require('./controllers/teamUpdate')
-
+const deleteTeamController = require('./controllers/deleteTeam')
+const quitTeamController  = require('./controllers/quitTeam')
+const deletePostController = require('./controllers/deletePost')
 
 //Middelware
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleWare')
 const authMiddleware = require('./middleware/authMiddleware')
+const isMemberMiddleWare = require('./middleware/isMemberMiddleware')
+
+
 
 app.use(expressSession({
     secret: 'Unicornland'
@@ -50,6 +54,8 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.set('view engine','ejs')
 
+
+//When the user logges in succsessfully, the users id is set as session.userId
 global.loggedIn = null;
 
 app.use("*", (req, res, next) => {
@@ -61,11 +67,12 @@ app.use("*", (req, res, next) => {
 
 
 
-
 app.listen(4000, ()=>{
     console.log('App listening on port 4000 ...')
 })
 
+
+//API
 app.get('/',homeController)
 app.get('/auth/register', redirectIfAuthenticatedMiddleWare, newUserController)
 app.post('/users/register', redirectIfAuthenticatedMiddleWare,  storeUserController)
@@ -75,15 +82,18 @@ app.get('/auth/logout',authMiddleware, logoutController)
 app.get('/auth/create', authMiddleware,createTeamController)
 app.post('/teams/create',authMiddleware, storeTeamController)
 app.get('/auth/userTeams', authMiddleware, userTeamsController)
-app.get('/teams/:id', authMiddleware, getTeamController)
+app.get('/teams/:id' ,authMiddleware, getTeamController)
 app.post('/teams/:id',authMiddleware, updateMembershipController)
-app.get('/findTeam', findTeamController)
-app.post('/findTeam', findTeamController)
-app.post('/teams/newPost/:id', newPostController)
+app.get('/findTeam',authMiddleware, findTeamController)
+app.post('/findTeam',authMiddleware, findTeamController)
+app.post('/teams/newPost/:id',authMiddleware, newPostController)
 app.get('/teams/post/:id', getPostController)
-app.post('/teams/post/:id/available', availableController)
-app.get('/profile/', profileController)
-app.post('/profile/update', updateProfileController)
-app.post('/teams/:id/update', updateTeamController)
-app.get('/teams/:id/update', teamUpdateController)
-app.post('/teams/post/:id/update', updatePostController)
+app.post('/teams/post/:id/available',authMiddleware, availableController)
+app.get('/profile/',authMiddleware, profileController)
+app.post('/profile/update',authMiddleware, updateProfileController)
+app.post('/teams/:id/update',authMiddleware, updateTeamController)
+app.get('/teams/:id/update',authMiddleware, teamUpdateController)
+app.post('/teams/post/:id/update',authMiddleware, updatePostController)
+app.post('/teams/:id/delete', authMiddleware, deleteTeamController)
+app.post('/teams/:id/quit', authMiddleware, quitTeamController)
+app.post('/teams/post/:id/delete', deletePostController)

@@ -1,6 +1,6 @@
 const User = require('../models/User.js')
 const Team = require('../models/Team')
-const Post = require('../models/TeamPost')
+const Post = require('../models/Post')
 const bcrypt = require('bcrypt')
 
 module.exports = async (req, res) => {

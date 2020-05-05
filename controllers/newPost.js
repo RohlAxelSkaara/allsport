@@ -1,4 +1,4 @@
-const TeamPost = require('../models/TeamPost.js')
+const Post = require('../models/Post.js')
 const mongoose = require('mongoose')
 const Team = require('../models/Team.js')
 const path = require('path')
@@ -8,29 +8,28 @@ const User = require('../models/User')
 
 module.exports = async (req,res)=> {
 
-        const teamsUpdate = await Team.findById(req.params.id)
-        const teamPost = await TeamPost.create({
+        const user= await User.findById(req.session.userId) //Creates new post
+        const teams = await Team.findById(req.params.id)
+        const post = await Post.create({
         ...req.body,
         title: req.body.title,
         description: req.body.description,
          available: [],
          notAvailable: [],
-         team: teamsUpdate._id
+         team: teams._id
     })
 
-
-    for(let i = 0; i < teamsUpdate.members.length; i++){
-        await teamPost.members.push(teamsUpdate.members[i])
-        await teamPost.save()
+    //Pushes all the registered members of a team, into the members array of the post
+    for(let i = 0; i < teams.members.length; i++){
+        await post.members.push(teams.members[i])
+        await post.save()
     }
+        //Pushes the post into the Team post array and saves the Team and Post
+        await teams.post.push(post)
+        await teams .save()
+        await post.save()
 
-        await teamsUpdate .teamPost.push(teamPost)
-        await teamsUpdate .save()
-        await teamPost.save()
 
-        const post = await TeamPost.findById(teamPost._id).populate('team').populate('available').populate('notAvailable')
-        const user= await User.findById(req.session.userId).populate('leadership')
-        const teams = await Team.findById(req.params.id)
 
         res.render('post',{
             post,

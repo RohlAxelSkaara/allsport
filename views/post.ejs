@@ -61,9 +61,10 @@
 
 
 
+
 <%let isLeader = false%>
 <%for(let i = 0; i < user.leadership.length; i++){%>
-<%if(user.leadership[i].toString() == teams.toString()){%>
+<%if(user.leadership[i].toString() == teams._id.toString()){%>
 <%isLeader = true%>
 <%}%>
 <%}%>
@@ -86,7 +87,7 @@
 
     <h2>Delete Post</h2>
 
-    <form action="/teams/post/<%= post.id%>/update" method="POST" enctype="multipart/form-data">
+    <form action="/teams/post/<%= post.id%>/delete" method="POST" enctype="multipart/form-data">
         <input type="password"  placeholder="Enter password" id="deletePost" name="deletePost">
         <button type="submit">Delete</button>
     </form>

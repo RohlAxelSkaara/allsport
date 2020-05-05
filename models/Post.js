@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 let uniqueValidator = require('mongoose-unique-validator')
 
-const TeamPostSchema = new Schema({
+const PostSchema = new Schema({
     title: String,
     description: String,
 
@@ -18,5 +18,5 @@ const TeamPostSchema = new Schema({
 
 
 
-const TeamPost = mongoose.model('TeamPost', TeamPostSchema);
-module.exports = TeamPost
+const Post = mongoose.model('Post', PostSchema);
+module.exports = Post

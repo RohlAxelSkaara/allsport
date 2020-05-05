@@ -48,6 +48,7 @@
     <br>
 
     <h2>Make leader</h2>
+
     <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
         <input type="text"  placeholder="Username" id="newLeader" name="newLeader">
         <button type="submit">Make leader</button>
@@ -58,7 +59,7 @@
 
     <h2>Delete Team</h2>
 
-    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
+    <form action="/teams/<%= teams.id%>/delete" method="POST" enctype="multipart/form-data">
         <input type="password"  placeholder="Enter password" id="deleteTeam" name="deleteTeam">
         <button type="submit">Delete</button>
     </form>

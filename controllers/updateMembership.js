@@ -1,21 +1,22 @@
 const Team = require('../models/Team.js')
 const User = require('../models/User.js')
-const TeamPost = require ('../models/TeamPost.js')
+const Post = require ('../models/Post')
 
 module.exports = async (req,res)=>{
     const teams = await Team.findById(req.params.id).populate('members').populate('leaders')
-    const user = await User.findById(req.session.userId).populate('membership').populate('leadership')
-    const teamPost = await TeamPost.find({team: teams})
+    const user = await User.findById(req.session.userId)
+    const post = await Post.find({team: teams})
 
 
-    //The to push the user._id into the teampost.member array
-    for(let i = 0; i < teamPost.length; i++){
-    await teamPost[i].members.push(user)
-    await teamPost[i].save()
+    //When the User joins the Team, the user is pushed into the members array of every post created by the team.
+    for(let i = 0; i < post.length; i++){
+    await post[i].members.push(user)
+    await post[i].save()
     }
 
+    //Pushes the user into the members array of the team
     await teams.members.push(user)
-
+    //Pushes the team into the membership array of the user
     await user.membership.push(teams)
 
     await user.save()

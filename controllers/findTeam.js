@@ -1,45 +1,14 @@
-
-
-/*
-const Team = require('../models/Team.js')
-
-module.exports = async (req,res)=>{
-
-
-
-        const teams = Team.find({teamName: 'Gutta IL' })
-    console.log(teams)
-
-    res.render('findTeam',{
-        teams
-    });
-}
-*/
+//This file enables the User to search for teams, based on one, multiple or all conditions
 const Team = require('../models/Team.js')
 const User = require('../models/User.js')
 module.exports = async (req, res) =>{
-/*
-     let sport = null
-         if(req.body.sportType != null){
-             sport = {
-                 sportType: req.body.sportType
-             }
-         }
 
-    let location = null
-    if(req.body.location != null){
-        location = {
-            location: req.body.location
-        }
-    }
-
-*/
-
+    //query requests all id´s from the form
     const query = req.body;
     const conditions = {};
 
-
-
+    //If anything is typed into the Team Name textfield, that teamName will be used as the var conditions
+    // example: conditions = {teamName: "CBS Football"}
     if (query.teamName) {
         conditions.teamName = query.teamName;
     }
@@ -56,31 +25,10 @@ module.exports = async (req, res) =>{
         conditions.level = query.level;
     }
 
-        const teams = await Team.find(conditions, function () {})
+    //if search is based on multiple conditions, the conditions variable will may look like
+    // example: conditions = {teamName: "CBS Football", location: "Fredriksberg"}
 
-    console.log(query)
-
-
-
-   /*let sportFilter = null
-    if(req.body.sportType != null){
-        sportFilter = req.body.sportType
-    }
-
-    let locationFilter = null
-    if(req.body.location != null){
-        locationFilter = req.body.location
-    }
-
-
-   let filter = {
-       sportType: sportFilter,
-       location: locationFilter
-   }
-
-*/
-    //const teams = await Team.find({...filter})
-
+    const teams = await Team.find(conditions, function () {})
     const user = await User.findById(req.session.userId)
     res.render('findTeam', {
         teams,

@@ -14,7 +14,7 @@ const TeamSchema = new Schema({
     location   : String,
     members    : [{ type: Schema.Types.ObjectId, ref: 'User'/*, unique: true*/ }],
     leaders    : [{type: Schema.Types.ObjectId, ref: 'User'}],
-    teamPost   : [{type: Schema.Types.ObjectId, ref: 'TeamPost'}],
+    post       : [{type: Schema.Types.ObjectId, ref: 'Post'}],
     level      : []
 })
 
