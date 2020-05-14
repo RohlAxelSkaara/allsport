@@ -5,7 +5,8 @@ const Post = require ('../models/Post')
 module.exports = async (req,res)=>{
     const teams = await Team.findById(req.params.id).populate('members').populate('leaders')
     const user = await User.findById(req.session.userId)
-    const post = await Post.find({team: teams})
+    const post = await Post.find({team: teams}).sort({'datePosted': -1})
+
 
 
     //When the User joins the Team, the user is pushed into the members array of every post created by the team.
@@ -23,6 +24,12 @@ module.exports = async (req,res)=>{
 
     await teams.save()
 
-    await res.redirect('back')
+     res.render('team',{
+            teams,
+            user,
+            post
+
+        });
+
 
 }

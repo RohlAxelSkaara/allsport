@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = async (req, res) => {
 
+    console.log(1)
 
     let post = await Post.findById(req.params.id).sort({'datePosted': -1})
     const user = await User.findById(req.session.userId)
@@ -17,15 +18,16 @@ module.exports = async (req, res) => {
 
     //If a password is written into the form
     if (await deletePost) {
+        console.log(2)
         //compares the password written in the form with the users password
         await bcrypt.compare(deletePost, user.password, async (error, same) => {
             if (await same) {
-
+                console.log(3)
                 //If passwords are the same, delete the Post.id from the Teams.post
 
                 await teams.post.pull(post)
                 await teams.save()
-
+                console.log(4)
 
 
                 //Then delete the Post and return to the teampage

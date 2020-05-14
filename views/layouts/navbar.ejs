@@ -25,7 +25,9 @@
             <a href="/profile">My profile</a>
         </li>
         <li>
-            <a href="/auth/logout">Logout</a>
+            <form action="/auth/logout" method="POST" enctype="multipart/form-data">
+                <button type="submit">Logout</button>
+            </form>
         </li>
     <%}%>
 </ul>

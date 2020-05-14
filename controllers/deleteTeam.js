@@ -11,7 +11,9 @@ module.exports = async (req, res) => {
 
     const user = await User.findById(req.session.userId)
 
-        //compares the password written in the form with the users password
+
+    //compares the password written in the form with the users password
+
         await bcrypt.compare(deleteTeam, user.password, async (error, same) => {
             if (await same) {
 
@@ -27,9 +29,14 @@ module.exports = async (req, res) => {
                 await Post.deleteMany({team: req.params.id})
                 await Team.findByIdAndDelete({_id: req.params.id}, () => {
                     //Sends the user to the homepage
+
                     res.redirect('/')
                 })
+            }else{
+                alert("Wrong password")
+                res.redirect('back')
             }
+
         })
 
 }

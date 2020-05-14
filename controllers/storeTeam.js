@@ -5,6 +5,7 @@ const Post = require('../models/Post')
 
 module.exports = async (req,res)=> {
     //Creates the Team, the User who created the team is set as both a member and a leader
+
     const teamsCreate = await Team.create({
         ...req.body,
         teamName: req.body.teamname,

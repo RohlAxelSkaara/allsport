@@ -8,9 +8,9 @@ const User = require('../models/User')
 
 module.exports = async (req,res)=> {
 
-        const user= await User.findById(req.session.userId) //Creates new post
+        const user= await User.findById(req.session.userId)
         const teams = await Team.findById(req.params.id)
-        const post = await Post.create({
+         const post = await Post.create({
         ...req.body,
         title: req.body.title,
         description: req.body.description,
@@ -18,6 +18,8 @@ module.exports = async (req,res)=> {
          notAvailable: [],
          team: teams._id
     })
+
+
 
     //Pushes all the registered members of a team, into the members array of the post
     for(let i = 0; i < teams.members.length; i++){

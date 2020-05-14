@@ -67,33 +67,63 @@ app.use("*", (req, res, next) => {
 
 
 
-app.listen(4000, ()=>{
-    console.log('App listening on port 4000 ...')
+app.listen(3000, ()=>{
+    console.log('App listening on port 3000 ...')
 })
 
 
 //API
-app.get('/',homeController)
-app.get('/auth/register', redirectIfAuthenticatedMiddleWare, newUserController)
-app.post('/users/register', redirectIfAuthenticatedMiddleWare,  storeUserController)
-app.get('/auth/login', redirectIfAuthenticatedMiddleWare,  logincontroller)
-app.post('/users/login', redirectIfAuthenticatedMiddleWare, loginUserController)
-app.get('/auth/logout',authMiddleware, logoutController)
-app.get('/auth/create', authMiddleware,createTeamController)
-app.post('/teams/create',authMiddleware, storeTeamController)
-app.get('/auth/userTeams', authMiddleware, userTeamsController)
-app.get('/teams/:id' ,authMiddleware, getTeamController)
-app.post('/teams/:id',authMiddleware, updateMembershipController)
+app.get('/',homeController)  //
+
+app.get('/auth/register', redirectIfAuthenticatedMiddleWare, newUserController)//
+
+app.post('/auth/register', redirectIfAuthenticatedMiddleWare,  storeUserController) //
+
+app.get('/auth/login', redirectIfAuthenticatedMiddleWare,  logincontroller) //
+
+app.post('/users/login', redirectIfAuthenticatedMiddleWare, loginUserController)//
+
+app.post('/auth/logout',authMiddleware, logoutController)//POST OR DELETE?
+
+app.get('/auth/create', authMiddleware,createTeamController)//
+
+app.post('/teams/create',authMiddleware, storeTeamController)//
+
+app.get('/auth/userTeams', authMiddleware, userTeamsController)//
+
+app.get('/teams/:id' ,authMiddleware, getTeamController)//
+
+app.post('/teams/:id',authMiddleware, updateMembershipController)// Post or Put?
+
 app.get('/findTeam',authMiddleware, findTeamController)
-app.post('/findTeam',authMiddleware, findTeamController)
-app.post('/teams/newPost/:id',authMiddleware, newPostController)
-app.get('/teams/post/:id', getPostController)
-app.post('/teams/post/:id/available',authMiddleware, availableController)
+
+app.post('/findTeam',authMiddleware, findTeamController)//Post or get?
+
+app.post('/teams/post/:id',authMiddleware, newPostController)//
+
+app.get('/teams/post/:id', getPostController)//
+
+app.post('/teams/post/available/:id',authMiddleware, availableController)//
+
 app.get('/profile/',authMiddleware, profileController)
+
 app.post('/profile/update',authMiddleware, updateProfileController)
+
 app.post('/teams/:id/update',authMiddleware, updateTeamController)
+
 app.get('/teams/:id/update',authMiddleware, teamUpdateController)
+
 app.post('/teams/post/:id/update',authMiddleware, updatePostController)
+
 app.post('/teams/:id/delete', authMiddleware, deleteTeamController)
-app.post('/teams/:id/quit', authMiddleware, quitTeamController)
-app.post('/teams/post/:id/delete', deletePostController)
+
+app.post('/teams/quit/:id', authMiddleware, quitTeamController)
+
+app.delete('/teams/post/:id', deletePostController)
+
+
+
+
+
+
+
