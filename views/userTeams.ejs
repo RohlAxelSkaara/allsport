@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +8,12 @@
 <h1>My teams</h1>
 <% for (let i = 0; i < user.membership.length; i++) { %>
 
-            <a href="/teams/<%= user.membership[i].id %>">
-                <h2>
-                    <%= user.membership[i].teamName%>
-                </h2>
-            </a>
-        <%}%>
+    <a href="/teams/<%= user.membership[i].id %>">
+        <h2>
+            <%= user.membership[i].teamName%>
+        </h2>
+    </a>
+<%}%>
 
 </body>
 </html>

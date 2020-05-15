@@ -1,4 +1,3 @@
-
 const express = require('express')
 
 const app = new express()
@@ -30,6 +29,7 @@ const updateProfileController = require('./controllers/updateProfile')
 const updateTeamController = require('./controllers/updateTeam')
 const updatePostController = require('./controllers/updatePost')
 const teamUpdateController = require('./controllers/teamUpdate')
+const makeLeaderController = require('./controllers/makeLeader')
 const deleteTeamController = require('./controllers/deleteTeam')
 const quitTeamController  = require('./controllers/quitTeam')
 const deletePostController = require('./controllers/deletePost')
@@ -37,7 +37,7 @@ const deletePostController = require('./controllers/deletePost')
 //Middelware
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleWare')
 const authMiddleware = require('./middleware/authMiddleware')
-const isMemberMiddleWare = require('./middleware/isMemberMiddleware')
+
 
 
 
@@ -48,7 +48,7 @@ app.use(expressSession({
 
 app.use(fileUpload())
 
-mongoose.connect('mongodb://localhost/allsport', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://Allsport:Semester.2@cluster0-qa74e.mongodb.net/test?retryWrites=true&w=majority\n', {useNewUrlParser: true});
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -73,57 +73,28 @@ app.listen(3000, ()=>{
 
 
 //API
-app.get('/',homeController)  //
-
-app.get('/auth/register', redirectIfAuthenticatedMiddleWare, newUserController)//
-
-app.post('/auth/register', redirectIfAuthenticatedMiddleWare,  storeUserController) //
-
-app.get('/auth/login', redirectIfAuthenticatedMiddleWare,  logincontroller) //
-
-app.post('/users/login', redirectIfAuthenticatedMiddleWare, loginUserController)//
-
-app.post('/auth/logout',authMiddleware, logoutController)//POST OR DELETE?
-
-app.get('/auth/create', authMiddleware,createTeamController)//
-
-app.post('/teams/create',authMiddleware, storeTeamController)//
-
-app.get('/auth/userTeams', authMiddleware, userTeamsController)//
-
-app.get('/teams/:id' ,authMiddleware, getTeamController)//
-
-app.post('/teams/:id',authMiddleware, updateMembershipController)// Post or Put?
-
+app.get('/',homeController)
+app.get('/auth/register', redirectIfAuthenticatedMiddleWare, newUserController)
+app.post('/users/register', redirectIfAuthenticatedMiddleWare,  storeUserController)
+app.get('/auth/login', redirectIfAuthenticatedMiddleWare,  logincontroller)
+app.post('/users/login', redirectIfAuthenticatedMiddleWare, loginUserController)
+app.post('/auth/logout',authMiddleware, logoutController)
+app.get('/auth/create', authMiddleware,createTeamController)
+app.post('/teams/create',authMiddleware, storeTeamController)
+app.get('/auth/userTeams', authMiddleware, userTeamsController)
+app.get('/teams/:id' ,authMiddleware, getTeamController)
+app.post('/teams/:id',authMiddleware, updateMembershipController)
 app.get('/findTeam',authMiddleware, findTeamController)
-
-app.post('/findTeam',authMiddleware, findTeamController)//Post or get?
-
-app.post('/teams/post/:id',authMiddleware, newPostController)//
-
-app.get('/teams/post/:id', getPostController)//
-
-app.post('/teams/post/available/:id',authMiddleware, availableController)//
-
+app.post('/findTeam',authMiddleware, findTeamController)
+app.post('/teams/newPost/:id',authMiddleware, newPostController)
+app.get('/teams/post/:id', getPostController)
+app.post('/teams/post/:id/available',authMiddleware, availableController)
 app.get('/profile/',authMiddleware, profileController)
-
 app.post('/profile/update',authMiddleware, updateProfileController)
-
 app.post('/teams/:id/update',authMiddleware, updateTeamController)
-
 app.get('/teams/:id/update',authMiddleware, teamUpdateController)
-
 app.post('/teams/post/:id/update',authMiddleware, updatePostController)
-
+app.post('/teams/:id/newLeader',authMiddleware, makeLeaderController)
 app.post('/teams/:id/delete', authMiddleware, deleteTeamController)
-
-app.post('/teams/quit/:id', authMiddleware, quitTeamController)
-
-app.delete('/teams/post/:id', deletePostController)
-
-
-
-
-
-
-
+app.post('/teams/:id/quit', authMiddleware, quitTeamController)
+app.post('/teams/post/:id/delete', deletePostController)

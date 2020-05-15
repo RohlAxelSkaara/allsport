@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,7 @@
 
 <%- include('layouts/navbar'); -%>
 <%if(!loggedIn){%>
-<h1>Welcome to allsport</h1>
+    <h1>Welcome to allsport</h1>
 <%}%>
 <%if(loggedIn){%>
 
@@ -19,15 +18,15 @@
 <%for (let i = 0; i < post.length; i++){%>
 
     <a href="/teams/post/<%= post[i]._id%>">
-   <h2><%= post[i].team.teamName%></h2>  <h3><%= post[i].title%></h3>
+        <h2><%= post[i].team.teamName%></h2>  <h3><%= post[i].title%></h3>
 
-    <p>
-        <%= post[i].description%>
-    </p>
+        <p>
+            <%= post[i].description%>
+        </p>
 
-<p><small>
-        <%= post[i].datePosted%>
-    </small></p>
+        <p><small>
+                <%= post[i].datePosted%>
+            </small></p>
     </a>
 <%}%>
 <%}%>

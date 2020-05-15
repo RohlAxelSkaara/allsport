@@ -8,53 +8,54 @@
 
 <%- include('layouts/navbar'); -%>
 <h2>Search for a team!</h2>
+<form action="" method="POST" enctype="multipart/form-data">
 
 
 
 
-<form action="/findTeam" method="POST" enctype="multipart/form-data">
+    <form action="/findTeam" method="POST" enctype="multipart/form-data">
 
-    <p>Team name</p>
-    <input type="text"  placeholder="Team name" id="teamName" name="teamName"">
+        <p>Team name</p>
+        <input type="text"  placeholder="Team name" id="teamName" name="teamName"">
 
-    <p>Sport</p>
+        <p>Sport</p>
         <input type="text"  placeholder="Sport" id="sportType" name="sportType">
 
 
-    <p>Location</p>
+        <p>Location</p>
 
         <input type="text"  placeholder="Location" id="location" name="location">
 
 
-    <p>Experience level:</p>
-    <input type="radio" id="level" name="level" value="beginner">
-    <label for="beginner">Beginner / For all</label><br>
-    <input type="radio" id="level" name="level" value="novice">
-    <label for="novice">Novice</label><br>
-    <input type="radio" id="level" name="level" value="intermediate">
-    <label for="level">Intermediate</label><br>
-    <input type="radio" id="level" name="level" value="advanced">
-    <label for="advanced">Advanced</label><br>
-    <input type="radio" id="level" name="level" value="expert">
-    <label for="expert">Expert</label>
-<br>
-<br>
-    <button type="submit">Search</button>
-</form>
+        <p>Experience level:</p>
+        <input type="radio" id="level" name="level" value="beginner">
+        <label for="beginner">Beginner / For all</label><br>
+        <input type="radio" id="level" name="level" value="novice">
+        <label for="novice">Novice</label><br>
+        <input type="radio" id="level" name="level" value="intermediate">
+        <label for="level">Intermediate</label><br>
+        <input type="radio" id="level" name="level" value="advanced">
+        <label for="advanced">Advanced</label><br>
+        <input type="radio" id="level" name="level" value="expert">
+        <label for="expert">Expert</label>
+        <br>
+        <br>
+        <button type="submit">Search</button>
+    </form>
 
 
     <br>
 
     <h2>Teams:</h2>
 
-<%for (let i = 0; i < teams.length; i++){%>
-    <a href="/teams/<%= teams[i]._id%>"
-      <h2>
-          <%= teams[i].teamName%>
-      </h2>
+    <%for (let i = 0; i < teams.length; i++){%>
+        <a href="/teams/<%= teams[i]._id%>"
+        <h2>
+            <%= teams[i].teamName%>
+        </h2>
         <br>
         <br>
-<%}%>
+    <%}%>
 
 </body>
 

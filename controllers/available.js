@@ -13,7 +13,7 @@ module.exports = async (req,res)=>{
 
     // If the button pressed with the id of "available"
     // the user._id will be pushed into the Post available arr, and be pulled out of notAvailable arr
-   if( await req.body.available == "available") {
+    if( await req.body.available == "available") {
         post.available.addToSet(user)
         post.notAvailable.pull(user)
     }

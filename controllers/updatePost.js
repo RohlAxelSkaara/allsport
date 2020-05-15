@@ -27,9 +27,5 @@ module.exports = async (req,res)=>{
 
 
 
-    res.render('post',{
-        post,
-        user,
-        teams
-    });
+    res.redirect('back');
 }

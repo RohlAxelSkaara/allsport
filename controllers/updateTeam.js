@@ -47,11 +47,11 @@ module.exports = async (req, res) => {
 
 
 
-       res.render('team', {
-           teams,
-           user,
-          post
-       });
-   }
+    res.render('team', {
+        teams,
+        user,
+        post
+    });
+}
 
 

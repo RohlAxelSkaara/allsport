@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,60 +10,61 @@
 
 
 
-    <h2>Update Team</h2>
-    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
+<h2>Update Team</h2>
+<form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
 
-        <p>Team name:</p>
-        <input type="text"  placeholder="Team name" id="updateTeamName" name="updateTeamName">
+    <p>Team name:</p>
+    <input type="text"  placeholder="Team name" id="updateTeamName" name="updateTeamName">
 
-        <p>Sport:</p>
-        <input type="text"   placeholder="Type of sport" id="updateSportType" name="updateSportType">
+    <p>Sport:</p>
+    <input type="text"   placeholder="Type of sport" id="updateSportType" name="updateSportType">
 
-        <p>Description:</p>
-        <textarea id="updateDescription" name="updateDescription" placeholder="Team description"></textarea>
+    <p>Description:</p>
+    <textarea id="updateDescription" name="updateDescription" placeholder="Team description"></textarea>
 
-        <p>Location:</p>
-        <input type="text"   placeholder="Location" id="updateLocation" name="updateLocation">
+    <p>Location:</p>
+    <input type="text"   placeholder="Location" id="updateLocation" name="updateLocation">
 
 
-        <p>Experience level:</p>
-        <input type="radio" id="updateLevel" name="updateLevel" value="beginner">
-        <label for="beginner">Beginner / For all</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="novice">
-        <label for="novice">Novice</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="intermediate">
-        <label for="level">Intermediate</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="advanced">
-        <label for="advanced">Advanced</label><br>
-        <input type="radio" id="updateLevel" name="updateLevel" value="expert">
-        <label for="expert">Expert</label>
-
-        <br>
-        <br>
-
-        <button type="submit">Update team</button>
-    </form>
+    <p>Experience level:</p>
+    <input type="radio" id="updateLevel" name="updateLevel" value="beginner">
+    <label for="beginner">Beginner / For all</label><br>
+    <input type="radio" id="updateLevel" name="updateLevel" value="novice">
+    <label for="novice">Novice</label><br>
+    <input type="radio" id="updateLevel" name="updateLevel" value="intermediate">
+    <label for="level">Intermediate</label><br>
+    <input type="radio" id="updateLevel" name="updateLevel" value="advanced">
+    <label for="advanced">Advanced</label><br>
+    <input type="radio" id="updateLevel" name="updateLevel" value="expert">
+    <label for="expert">Expert</label>
 
     <br>
+    <br>
 
-    <h2>Make leader</h2>
+    <button type="submit">Update team</button>
+</form>
 
-    <form action="/teams/<%= teams.id%>/update" method="POST" enctype="multipart/form-data">
-        <input type="text"  placeholder="Username" id="newLeader" name="newLeader">
-        <button type="submit">Make leader</button>
-    </form>
+<br>
+
+<h2>Make leader</h2>
+
+<form action="/teams/<%= teams.id%>/newLeader" method="POST" enctype="multipart/form-data">
+    <input type="text"  placeholder="Username" id="newLeader" name="newLeader">
+    <button type="submit">Make leader</button>
+</form>
 
 
 <br>
 
-    <h2>Delete Team</h2>
+<h2>Delete Team</h2>
 
-    <form action="/teams/<%= teams.id%>/delete" method="POST" enctype="multipart/form-data">
-        <input type="password"  placeholder="Enter password" id="deleteTeam" name="deleteTeam">
-        <button type="submit">Delete</button>
-    </form>
+<form action="/teams/<%= teams.id%>/delete" method="POST" enctype="multipart/form-data">
+    <input type="password"  placeholder="Enter password" id="deleteTeam" name="deleteTeam">
+    <button type="submit">Delete</button>
+</form>
 
 
 
 </body>
 </html>
+

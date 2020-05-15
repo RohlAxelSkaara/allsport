@@ -7,7 +7,7 @@
 
 <%- include('layouts/navbar'); -%>
 <a href="/teams/<%= post.team._id%>">
-    <h1><%= post.team.teamName%></h1>
+    <h1><%= teams.teamName%></h1>
 </a>
 
 <h2><%= post.title%></h2>
@@ -24,20 +24,20 @@
 <%let notAvailable = false%>
 <%for(let i = 0; i < post.notAvailable.length; i++){%>
 <%if(post.notAvailable[i].id.toString() == user._id){%>
-<% notAvailable = true%>
+    <% notAvailable = true%>
 <%}%>
 <%}%>
 
 <%if(signedUp == false){%>
-<form action="/teams/post/available/<%= post.id%>" method="POST" enctype="multipart/form-data">
-<button type="submit" name="available" value="available">Sign up</button>
-</form>
+    <form action="/teams/post/<%= post.id%>/available" method="POST" enctype="multipart/form-data">
+        <button type="submit" name="available" value="available">Sign up</button>
+    </form>
 <%}%>
 
 <%if(notAvailable == false){%>
-<form action="/teams/post/available/<%= post.id%>" method="POST" enctype="multipart/form-data">
-<button type="submit" name="notAvailable" value="notAvailable">Cant come</button>
-</form>
+    <form action="/teams/post/<%= post.id%>/available" method="POST" enctype="multipart/form-data">
+        <button type="submit" name="notAvailable" value="notAvailable">Cant come</button>
+    </form>
 <%}%>
 
 <h2>Signed up players: <%= post.available.length%></h2>
@@ -83,11 +83,11 @@
 
         <button type="submit">Update post</button>
     </form>
-<br>
+    <br>
 
     <h2>Delete Post</h2>
 
-    <form action="/teams/post/<%= post.id%>" method="DELETE" enctype="multipart/form-data">
+    <form action="/teams/post/<%= post.id%>/delete" method="POST" enctype="multipart/form-data">
         <input type="password"  placeholder="Enter password" id="deletePost" name="deletePost">
         <button type="submit">Delete</button>
     </form>
@@ -97,11 +97,6 @@
 
 
 <%}%>
-
-
-
-
-
 
 
 </body>

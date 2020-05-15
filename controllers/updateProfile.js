@@ -1,7 +1,7 @@
 const User = require('../models/User.js')
 const Team = require('../models/Team')
 const Post = require('../models/Post')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 module.exports = async (req, res) => {
 
@@ -13,10 +13,14 @@ module.exports = async (req, res) => {
     let deleteUser = await req.body.deleteUser;
     const conditions = {};
 
-    if (updateUsername) {
-        conditions.username = updateUsername
-        await User.findByIdAndUpdate(req.session.userId, conditions, function () {
-        })
+    try {
+        if (updateUsername) {
+            conditions.username = updateUsername
+            await User.findByIdAndUpdate(req.session.userId, conditions, function () {
+            })
+        }
+    }catch(e) {
+        console.log( 'Username exist')
     }
 
     if (await updatePassword) {
@@ -29,8 +33,9 @@ module.exports = async (req, res) => {
     }
 
 
-     if (await deleteUser) {
-         await bcrypt.compare(deleteUser, userDelete.password, async (error, same) => {
+
+    if (await deleteUser) {
+        await bcrypt.compare(deleteUser, userDelete.password, async (error, same) => {
             if (await same) {
 
                 //Delete the User from all Users Team.members
@@ -53,7 +58,7 @@ module.exports = async (req, res) => {
                 //Delete the user and return to homepage
                 await User.findByIdAndDelete({_id: userDelete._id})
                 await req.session.destroy(()=>{
-                   res.redirect('/')
+                    res.redirect('/')
                 })
 
             }
